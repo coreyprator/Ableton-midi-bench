@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Ableton MIDI Bench
 
 A Windows-friendly Python tool to benchmark MIDI performance accuracy against a reference clip exported from Ableton Live.
@@ -54,3 +55,7 @@ midi-bench compare ^
 - Swing ratio analysis
 - Track filtering by instrument program or channel
 - Optional .als parsing in a future version
+=======
+# Ableton-midi-bench
+A Windows-friendly Python tool to benchmark MIDI performance accuracy against a reference clip exported from Ableton Live.
+>>>>>>> c42f9d35bf8435afe87aafb62d87c134264c1e94
