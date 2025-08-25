@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "midi-benchmark"
+version = "0.1.0"
+description = "Benchmark MIDI performance accuracy against a reference clip"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "pretty_midi",
+  "numpy",
+  "pandas",
+  "matplotlib",
+  "click",
+  "tabulate"
+]
+
+[project.scripts]
+midi-bench = "midi_benchmark.cli_compare:main"

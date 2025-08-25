@@ -1,0 +1,10 @@
+2025-08-22 10:05:13,286 INFO Running command: python -m midi_benchmark.cli_compare compare --ref G:/My Drive/Code/Python/Ableton-midi-bench/data/reference_melody.mid --perf G:/My Drive/Code/Python/Ableton-midi-bench/data/performance_melody_take1.mid --out G:/My Drive/Code/Python/Ableton-midi-bench/runs/comping_take1 --onset-tol-list 20,40,60 --max-onset-ms 200
+2025-08-22 10:05:13,335 ERROR Comparison failed. Return code: 1
+Stdout: 
+Stderr: C:\Users\Owner\AppData\Local\Programs\Python\Python313\python.exe: Error while finding module specification for 'midi_benchmark.cli_compare' (ModuleNotFoundError: No module named 'midi_benchmark')
+
+2025-08-22 10:15:58,824 INFO Running command: python -m midi_benchmark.cli_compare compare --ref G:/My Drive/Code/Python/Ableton-midi-bench/data/reference_melody.mid --perf G:/My Drive/Code/Python/Ableton-midi-bench/data/performance_melody_take1.mid --out G:/My Drive/Code/Python/Ableton-midi-bench/runs/comping_take1 --onset-tol-list 20,40,60 --max-onset-ms 200
+2025-08-22 10:15:58,879 ERROR Comparison failed. Return code: 1
+Stdout: 
+Stderr: C:\Users\Owner\AppData\Local\Programs\Python\Python313\python.exe: Error while finding module specification for 'midi_benchmark.cli_compare' (ModuleNotFoundError: No module named 'midi_benchmark')
+

@@ -1,0 +1,7 @@
+pretty_midi
+numpy
+pandas
+matplotlib
+click
+tabulate
+music21
