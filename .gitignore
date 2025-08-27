@@ -5,3 +5,7 @@ runs/
 *.csv
 *.png
 .DS_Store
+# Database backups
+/backups/
+/**/*.bak
+/**/*.trn

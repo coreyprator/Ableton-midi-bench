@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "db:backup": "powershell -NoProfile -ExecutionPolicy Bypass -File ./tools/backup_db.ps1"
+  }
+}

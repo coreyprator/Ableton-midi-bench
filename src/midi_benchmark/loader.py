@@ -51,4 +51,21 @@ def load_notes(path: str, split_note: str = "B2") -> pd.DataFrame:
     df = pd.DataFrame(notes)
     if not df.empty:
         df = df.sort_values(["start", "pitch"]).reset_index(drop=True)
+
+        # --- Add musical time columns ---
+        # Assume 4/4, 120bpm if not available
+        try:
+            tempo = midi.get_tempo_changes()[1][0] if len(midi.get_tempo_changes()[1]) > 0 else 120.0
+        except Exception:
+            tempo = 120.0
+        try:
+            time_sig = midi.time_signature_changes[0] if midi.time_signature_changes else None
+            beats_per_bar = time_sig.numerator if time_sig else 4
+        except Exception:
+            beats_per_bar = 4
+        # Compute beat_absolute
+        df["beat_absolute"] = df["start"] * (tempo / 60.0)
+        df["bar_index"] = (df["beat_absolute"] // beats_per_bar).astype(int)
+        df["beat_in_bar"] = df["beat_absolute"] % beats_per_bar
+        df["bar_beat_label"] = df["bar_index"].astype(str) + ":" + df["beat_in_bar"].round(3).astype(str)
     return df

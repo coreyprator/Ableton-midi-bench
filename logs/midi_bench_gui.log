@@ -1,0 +1,135 @@
+2025-08-26 22:55:48,824 INFO Reference DataFrame head:
+   pitch  start       end       dur  vel  channel  program     part color  beat_absolute  bar_index  beat_in_bar bar_beat_label
+0     41    0.0  0.744792  0.744792   80        0        0     bass  None            0.0          0          0.0          0:0.0
+1     57    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+2     60    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+3     64    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+4     67    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+
+Columns: ['pitch', 'start', 'end', 'dur', 'vel', 'channel', 'program', 'part', 'color', 'beat_absolute', 'bar_index', 'beat_in_bar', 'bar_beat_label']
+2025-08-26 22:55:48,849 ERROR Reference SQL insert failed: 'SqlConfig' object is not a mapping
+2025-08-26 22:55:48,850 ERROR Unexpected error running comparison.
+Traceback (most recent call last):
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\midi_bench_gui.py", line 266, in run_comparison
+    n_ref = insert_notes_df(ref_df, "dbo.reference_notes", self.var_ref_path.get(), cfg, truncate=truncate)
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\sql_load.py", line 311, in insert_notes_df
+    with _get_connection(cfg) as cn:
+         ~~~~~~~~~~~~~~~^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\sql_load.py", line 54, in _get_connection
+    cn = pyodbc.connect(build_conn_str(cfg), autocommit=False)
+                        ~~~~~~~~~~~~~~^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\sql_load.py", line 35, in build_conn_str
+    c = {**_default_cfg(), **(cfg or {})}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'SqlConfig' object is not a mapping
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\midi_bench_gui.py", line 269, in run_comparison
+    logging.error(f"First 5 rows: {ref_df.head()[['track_index','channel','program','pitch','velocity','start','end','dur']].to_dict(orient='records')}")
+                                   ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\.venv-1\Lib\site-packages\pandas\core\frame.py", line 4113, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\.venv-1\Lib\site-packages\pandas\core\indexes\base.py", line 6212, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\.venv-1\Lib\site-packages\pandas\core\indexes\base.py", line 6264, in _raise_if_missing
+    raise KeyError(f"{not_found} not in index")
+KeyError: "['track_index', 'velocity'] not in index"
+2025-08-26 22:56:50,698 INFO Reference DataFrame head:
+   pitch  start       end       dur  vel  channel  program     part color  beat_absolute  bar_index  beat_in_bar bar_beat_label
+0     41    0.0  0.744792  0.744792   80        0        0     bass  None            0.0          0          0.0          0:0.0
+1     57    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+2     60    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+3     64    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+4     67    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+
+Columns: ['pitch', 'start', 'end', 'dur', 'vel', 'channel', 'program', 'part', 'color', 'beat_absolute', 'bar_index', 'beat_in_bar', 'bar_beat_label']
+2025-08-26 22:56:50,718 ERROR Reference SQL insert failed: 'SqlConfig' object is not a mapping
+2025-08-26 22:56:50,718 ERROR Unexpected error running comparison.
+Traceback (most recent call last):
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\midi_bench_gui.py", line 266, in run_comparison
+    n_ref = insert_notes_df(ref_df, "dbo.reference_notes", self.var_ref_path.get(), cfg, truncate=truncate)
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\sql_load.py", line 311, in insert_notes_df
+    with _get_connection(cfg) as cn:
+         ~~~~~~~~~~~~~~~^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\sql_load.py", line 54, in _get_connection
+    cn = pyodbc.connect(build_conn_str(cfg), autocommit=False)
+                        ~~~~~~~~~~~~~~^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\sql_load.py", line 35, in build_conn_str
+    c = {**_default_cfg(), **(cfg or {})}
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'SqlConfig' object is not a mapping
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\midi_bench_gui.py", line 269, in run_comparison
+    logging.error(f"First 5 rows: {ref_df.head()[['track_index','channel','program','pitch','velocity','start','end','dur']].to_dict(orient='records')}")
+                                   ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\.venv-1\Lib\site-packages\pandas\core\frame.py", line 4113, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\.venv-1\Lib\site-packages\pandas\core\indexes\base.py", line 6212, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\.venv-1\Lib\site-packages\pandas\core\indexes\base.py", line 6264, in _raise_if_missing
+    raise KeyError(f"{not_found} not in index")
+KeyError: "['track_index', 'velocity'] not in index"
+2025-08-26 23:04:54,602 INFO Reference DataFrame head:
+   pitch  start       end       dur  vel  channel  program     part color  beat_absolute  bar_index  beat_in_bar bar_beat_label
+0     41    0.0  0.744792  0.744792   80        0        0     bass  None            0.0          0          0.0          0:0.0
+1     57    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+2     60    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+3     64    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+4     67    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+
+Columns: ['pitch', 'start', 'end', 'dur', 'vel', 'channel', 'program', 'part', 'color', 'beat_absolute', 'bar_index', 'beat_in_bar', 'bar_beat_label']
+2025-08-26 23:04:54,736 ERROR Reference SQL insert failed: ('08001', '[08001] [Microsoft][ODBC Driver 17 for SQL Server]Encryption not supported on SQL Server. (20) (SQLDriverConnect); [08001] [Microsoft][ODBC Driver 17 for SQL Server]Client unable to establish connection (20)')
+2025-08-26 23:04:54,737 ERROR Unexpected error running comparison.
+Traceback (most recent call last):
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\midi_bench_gui.py", line 266, in run_comparison
+    n_ref = insert_notes_df(ref_df, "dbo.reference_notes", self.var_ref_path.get(), cfg, truncate=truncate)
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\sql_load.py", line 244, in insert_notes_df
+    with _get_connection(cfg) as cn:
+         ~~~~~~~~~~~~~~~^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\sql_load.py", line 85, in _get_connection
+    return pyodbc.connect(conn_str, autocommit=False)
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 17 for SQL Server]Encryption not supported on SQL Server. (20) (SQLDriverConnect); [08001] [Microsoft][ODBC Driver 17 for SQL Server]Client unable to establish connection (20)')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\midi_bench_gui.py", line 269, in run_comparison
+    logging.error(f"First 5 rows: {ref_df.head()[['track_index','channel','program','pitch','velocity','start','end','dur']].to_dict(orient='records')}")
+                                   ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\.venv-1\Lib\site-packages\pandas\core\frame.py", line 4113, in __getitem__
+    indexer = self.columns._get_indexer_strict(key, "columns")[1]
+              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\.venv-1\Lib\site-packages\pandas\core\indexes\base.py", line 6212, in _get_indexer_strict
+    self._raise_if_missing(keyarr, indexer, axis_name)
+    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\.venv-1\Lib\site-packages\pandas\core\indexes\base.py", line 6264, in _raise_if_missing
+    raise KeyError(f"{not_found} not in index")
+KeyError: "['track_index', 'velocity'] not in index"
+2025-08-26 23:15:11,375 INFO Reference DataFrame head:
+   pitch  start       end       dur  vel  channel  program     part color  beat_absolute  bar_index  beat_in_bar bar_beat_label
+0     41    0.0  0.744792  0.744792   80        0        0     bass  None            0.0          0          0.0          0:0.0
+1     57    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+2     60    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+3     64    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+4     67    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+
+Columns: ['pitch', 'start', 'end', 'dur', 'vel', 'channel', 'program', 'part', 'color', 'beat_absolute', 'bar_index', 'beat_in_bar', 'bar_beat_label']
+2025-08-26 23:15:11,521 INFO Performance DataFrame head:
+   pitch     start       end       dur  vel  channel  program     part color  beat_absolute  bar_index  beat_in_bar bar_beat_label
+0     57  0.000000  0.333333  0.333333   74        0        0  harmony  None       0.000000          0     0.000000          0:0.0
+1     60  0.000000  0.348958  0.348958   81        0        0  harmony  None       0.000000          0     0.000000          0:0.0
+2     64  0.000000  0.343750  0.343750   68        0        0  harmony  None       0.000000          0     0.000000          0:0.0
+3     67  0.000000  0.338542  0.338542   67        0        0  harmony  None       0.000000          0     0.000000          0:0.0
+4     57  0.479167  1.328125  0.848958   64        0        0  harmony  None       0.958333          0     0.958333        0:0.958
+
+Columns: ['pitch', 'start', 'end', 'dur', 'vel', 'channel', 'program', 'part', 'color', 'beat_absolute', 'bar_index', 'beat_in_bar', 'bar_beat_label']

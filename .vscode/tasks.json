@@ -1,0 +1,39 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "DB: Backup",
+      "type": "shell",
+      "command": "powershell",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/tools/backup_db.ps1",
+        "-Instance",
+        ".\\SQLEXPRESS",
+        "-Database",
+        "ableton-midi-bench",
+        "-Keep",
+        "14",
+        "-Verify"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "DB: Add provenance columns",
+      "type": "shell",
+      "command": "sqlcmd",
+      "args": [
+        "-S",
+        "(localdb)\\MSSQLLocalDB",
+        "-E",
+        "-b",
+        "-i",
+        "${workspaceFolder}/sql/alter_tables_add_provenance.sql"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

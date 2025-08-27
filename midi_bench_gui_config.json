@@ -1,1 +1,18 @@
-{"ref_path": "G:/My Drive/Code/Python/Ableton-midi-bench/data/reference_melody.mid", "perf_path": "G:/My Drive/Code/Python/Ableton-midi-bench/data/performance_comping take 2025-08-25 0817.mid", "out_dir": "G:/My Drive/Code/Python/Ableton-midi-bench/runs/comping_take1", "onset_tol": "20,40,60", "max_onset_ms": "200", "split_note": "B1", "verbose": false}
+{
+  "reference_midi": "G:/My Drive/Code/Python/Ableton-midi-bench/data/reference_melody.mid",
+  "performance_midi": "G:/My Drive/Code/Python/Ableton-midi-bench/data/performance_comping take 2025-08-25 0817.mid",
+  "output_dir": "G:/My Drive/Code/Python/Ableton-midi-bench/runs/comping_take1",
+  "onset_tolerances_ms": "20,40,60",
+  "max_onset_ms": 200,
+  "split_note": "B2",
+  "verbose": false,
+  "write_direct_sql": true,
+  "sql_server": "(localdb)\\MSSQLLocalDB",
+  "sql_database": "ableton-midi-bench",
+  "odbc_driver": "ODBC Driver 17 for SQL Server",
+  "encrypt": false,
+  "trust_server_certificate": false,
+  "truncate_before_load": true,
+  "load_reference": true,
+  "load_performance": true
+}

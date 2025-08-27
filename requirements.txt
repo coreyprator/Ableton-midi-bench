@@ -4,3 +4,4 @@ pandas
 matplotlib
 click
 tabulate
+pyodbc>=5.1

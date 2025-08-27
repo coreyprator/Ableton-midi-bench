@@ -1,2 +1,0 @@
-[console_scripts]
-midi-bench = midi_benchmark.cli_compare:main

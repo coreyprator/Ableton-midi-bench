@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "ms-mssql.mssql",
+    "github.vscode-pull-request-github",
+    "eamodio.gitlens"
+  ]
+}

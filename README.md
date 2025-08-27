@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Ableton MIDI Bench
 
 A Windows-friendly Python tool to benchmark MIDI performance accuracy against a reference clip exported from Ableton Live.
@@ -55,7 +54,51 @@ midi-bench compare ^
 - Swing ratio analysis
 - Track filtering by instrument program or channel
 - Optional .als parsing in a future version
-=======
-# Ableton-midi-bench
-A Windows-friendly Python tool to benchmark MIDI performance accuracy against a reference clip exported from Ableton Live.
->>>>>>> c42f9d35bf8435afe87aafb62d87c134264c1e94
+
+
+## Standard Config
+- The GUI auto-loads the last-used config from `midi_bench_gui_config.json` in the project root.
+- Use the one-click save button in the GUI to persist your settings.
+- You can also manage config from the CLI:
+
+```powershell
+python -m midi_benchmark.cfg --print   # Show config path and JSON
+python -m midi_benchmark.cfg --reset   # Restore defaults and overwrite config file
+```
+
+## SQL Migrations & Verification
+- To apply all SQL migrations (indexes, views):
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\apply_sql.ps1
+```
+
+- To verify a load, run this SQL in SSMS or Azure Data Studio:
+
+```sql
+SELECT TOP 10 * FROM dbo.reference_notes ORDER BY id DESC;
+SELECT TOP 10 * FROM dbo.performance_notes ORDER BY id DESC;
+SELECT * FROM dbo.vw_notes_min WHERE bar_beat_label = '0:0.0';
+```
+
+- Migration scripts are in `tools/sql/` and are applied in order by filename.
+
+## Database Backup
+
+Run a one-off backup:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\tools\backup_db.ps1 -Instance ".\SQLEXPRESS" -Database "ableton-midi-bench" -Keep 14 -Verify
+```
+
+Schedule nightly via Task Scheduler:
+
+SCHTASKS /Create /TN "AbletonMidiBenchNightlyBackup" /XML ".\tools\schedule_backup.xml" /F
+
+Defaults target (localdb)\MSSQLLocalDB, but for reliable BACKUP support we recommend .\SQLEXPRESS.
+
+### Acceptance
+- Running `./tools/backup_db.ps1` produces a timestamped `.bak` in `backups/`.
+- `-Keep` prunes older backups.
+- `-Verify` performs `RESTORE VERIFYONLY`.
+- No backups are tracked by git due to `.gitignore`.

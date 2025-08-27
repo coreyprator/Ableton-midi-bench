@@ -1,0 +1,1 @@
+{"ref_path": "G:/My Drive/Code/Python/Ableton-midi-bench/data/reference_melody.mid", "perf_path": "G:/My Drive/Code/Python/Ableton-midi-bench/data/performance_comping take 2025-08-25 0817.mid", "out_dir": "G:/My Drive/Code/Python/Ableton-midi-bench/runs/comping_take1", "onset_tol": "20,40,60", "max_onset_ms": "200", "split_note": "B1", "verbose": false}
