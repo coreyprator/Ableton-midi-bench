@@ -133,3 +133,155 @@ Columns: ['pitch', 'start', 'end', 'dur', 'vel', 'channel', 'program', 'part', '
 4     57  0.479167  1.328125  0.848958   64        0        0  harmony  None       0.958333          0     0.958333        0:0.958
 
 Columns: ['pitch', 'start', 'end', 'dur', 'vel', 'channel', 'program', 'part', 'color', 'beat_absolute', 'bar_index', 'beat_in_bar', 'bar_beat_label']
+2025-08-27 15:11:47,875 INFO Performance DataFrame head:
+   pitch  start       end       dur  vel  channel  program     part color  beat_absolute  bar_index  beat_in_bar bar_beat_label
+0     41    0.0  0.864583  0.864583   84        0        0     bass  None            0.0          0          0.0          0:0.0
+1     57    0.0  0.036458  0.036458   77        0        0  harmony  None            0.0          0          0.0          0:0.0
+2     60    0.0  0.088542  0.088542   79        0        0  harmony  None            0.0          0          0.0          0:0.0
+3     64    0.0  0.093750  0.093750   77        0        0  harmony  None            0.0          0          0.0          0:0.0
+4     67    0.0  0.093750  0.093750   65        0        0  harmony  None            0.0          0          0.0          0:0.0
+
+Columns: ['pitch', 'start', 'end', 'dur', 'vel', 'channel', 'program', 'part', 'color', 'beat_absolute', 'bar_index', 'beat_in_bar', 'bar_beat_label']
+2025-08-27 15:11:47,994 ERROR Direct SQL load failed.
+Traceback (most recent call last):
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\midi_bench_gui.py", line 325, in run_comparison
+    n_perf = insert_notes_df(perf_df, "dbo.performance_notes", self.var_perf_path.get(), cfg, truncate=truncate)
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\sql_load.py", line 244, in insert_notes_df
+    with _get_connection(cfg) as cn:
+         ~~~~~~~~~~~~~~~^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\sql_load.py", line 83, in _get_connection
+    raise RuntimeError("pyodbc is not available in this environment.")
+RuntimeError: pyodbc is not available in this environment.
+2025-08-27 15:11:48,044 ERROR Ref head (safe): N/A
+2025-08-27 15:11:48,145 ERROR Perf head (safe): [{'pitch': 41, 'start': 0.0, 'end': 0.8645833333333333, 'dur': 0.8645833333333333, 'vel': 84, 'channel': 0, 'program': 0, 'part': 'bass', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 57, 'start': 0.0, 'end': 0.03645833333333333, 'dur': 0.03645833333333333, 'vel': 77, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 60, 'start': 0.0, 'end': 0.08854166666666666, 'dur': 0.08854166666666666, 'vel': 79, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 64, 'start': 0.0, 'end': 0.09375, 'dur': 0.09375, 'vel': 77, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 67, 'start': 0.0, 'end': 0.09375, 'dur': 0.09375, 'vel': 65, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}]
+2025-08-27 15:16:44,797 INFO Performance DataFrame head:
+   pitch  start       end       dur  vel  channel  program     part color  beat_absolute  bar_index  beat_in_bar bar_beat_label
+0     41    0.0  0.864583  0.864583   84        0        0     bass  None            0.0          0          0.0          0:0.0
+1     57    0.0  0.036458  0.036458   77        0        0  harmony  None            0.0          0          0.0          0:0.0
+2     60    0.0  0.088542  0.088542   79        0        0  harmony  None            0.0          0          0.0          0:0.0
+3     64    0.0  0.093750  0.093750   77        0        0  harmony  None            0.0          0          0.0          0:0.0
+4     67    0.0  0.093750  0.093750   65        0        0  harmony  None            0.0          0          0.0          0:0.0
+
+Columns: ['pitch', 'start', 'end', 'dur', 'vel', 'channel', 'program', 'part', 'color', 'beat_absolute', 'bar_index', 'beat_in_bar', 'bar_beat_label']
+2025-09-03 09:03:26,722 INFO Performance DataFrame head:
+   pitch     start  ...  beat_in_bar  bar_beat_label
+0     57  0.000000  ...     0.000000           0:0.0
+1     60  0.000000  ...     0.000000           0:0.0
+2     64  0.000000  ...     0.000000           0:0.0
+3     67  0.010417  ...     0.020833         0:0.021
+4     41  0.026042  ...     0.052083         0:0.052
+
+[5 rows x 13 columns]
+
+Columns: ['pitch', 'start', 'end', 'dur', 'vel', 'channel', 'program', 'part', 'color', 'beat_absolute', 'bar_index', 'beat_in_bar', 'bar_beat_label']
+2025-09-05 10:11:54,298 INFO Performance DataFrame head:
+   pitch  start       end       dur  vel  ...  color  beat_absolute bar_index beat_in_bar  bar_beat_label
+0     41    0.0  0.583333  0.583333   84  ...   None            0.0         0         0.0           0:0.0
+1     57    0.0  0.229167  0.229167   73  ...   None            0.0         0         0.0           0:0.0
+2     60    0.0  0.223958  0.223958   70  ...   None            0.0         0         0.0           0:0.0
+3     64    0.0  0.197917  0.197917   68  ...   None            0.0         0         0.0           0:0.0
+4     67    0.0  0.223958  0.223958   72  ...   None            0.0         0         0.0           0:0.0
+
+[5 rows x 13 columns]
+
+Columns: ['pitch', 'start', 'end', 'dur', 'vel', 'channel', 'program', 'part', 'color', 'beat_absolute', 'bar_index', 'beat_in_bar', 'bar_beat_label']
+2025-11-07 14:05:48,282 INFO Reference DataFrame head:
+   pitch  start  ...  beat_in_bar  bar_beat_label
+0     41    0.0  ...          0.0           0:0.0
+1     57    0.0  ...          0.0           0:0.0
+2     60    0.0  ...          0.0           0:0.0
+3     64    0.0  ...          0.0           0:0.0
+4     67    0.0  ...          0.0           0:0.0
+
+[5 rows x 13 columns]
+
+Columns: ['pitch', 'start', 'end', 'dur', 'vel', 'channel', 'program', 'part', 'color', 'beat_absolute', 'bar_index', 'beat_in_bar', 'bar_beat_label']
+2025-11-07 14:05:48,343 ERROR Direct SQL load failed.
+Traceback (most recent call last):
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\midi_bench_gui.py", line 319, in run_comparison
+    n_ref = insert_notes_df(ref_df, "dbo.reference_notes", self.var_ref_path.get(), cfg, truncate=truncate)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\sql_load.py", line 250, in insert_notes_df
+    cur.executemany(insert_sql, _rows_for_insert(out[_SQL_COLS]))
+pyodbc.ProgrammingError: ('42S22', "[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid column name 'source_filename'. (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid column name 'source_file_mtime'. (207); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Statement(s) could not be prepared. (8180)")
+2025-11-07 14:05:48,359 ERROR Ref head (safe): [{'pitch': 41, 'start': 0.0, 'end': 0.7447916666666666, 'dur': 0.7447916666666666, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'bass', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 57, 'start': 0.0, 'end': 0.49479166666666663, 'dur': 0.49479166666666663, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 60, 'start': 0.0, 'end': 0.49479166666666663, 'dur': 0.49479166666666663, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 64, 'start': 0.0, 'end': 0.49479166666666663, 'dur': 0.49479166666666663, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 67, 'start': 0.0, 'end': 0.49479166666666663, 'dur': 0.49479166666666663, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}]
+2025-11-07 16:58:00,819 INFO Reference DataFrame head:
+   pitch  start       end       dur  vel  channel  program     part color  beat_absolute  bar_index  beat_in_bar bar_beat_label
+0     41    0.0  0.744792  0.744792   80        0        0     bass  None            0.0          0          0.0          0:0.0
+1     57    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+2     60    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+3     64    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+4     67    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+
+Columns: ['pitch', 'start', 'end', 'dur', 'vel', 'channel', 'program', 'part', 'color', 'beat_absolute', 'bar_index', 'beat_in_bar', 'bar_beat_label']
+2025-11-07 16:58:15,858 ERROR Direct SQL load failed.
+Traceback (most recent call last):
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\midi_bench_gui.py", line 322, in run_comparison
+    n_ref = insert_notes_df(ref_df, "dbo.reference_notes", self.var_ref_path.get(), cfg, truncate=truncate)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\sql_load.py", line 244, in insert_notes_df
+    with _get_connection(cfg) as cn:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\sql_load.py", line 85, in _get_connection
+    return pyodbc.connect(conn_str, autocommit=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]SQL Server Network Interfaces: The system cannot find the file specified.\r\n (2) (SQLDriverConnect); [08001] [Microsoft][ODBC Driver 18 for SQL Server]Login timeout expired (0); [08001] [Microsoft][ODBC Driver 18 for SQL Server]A network-related or instance-specific error has occurred while establishing a connection to (localdb)\\MSSQLLocalDB. Server is not found or not accessible. Check if instance name is correct and if SQL Server is configured to allow remote connections. For more information see SQL Server Books Online. (2)')
+2025-11-07 16:58:15,891 ERROR Ref head (safe): [{'pitch': 41, 'start': 0.0, 'end': 0.7447916666666666, 'dur': 0.7447916666666666, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'bass', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 57, 'start': 0.0, 'end': 0.49479166666666663, 'dur': 0.49479166666666663, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 60, 'start': 0.0, 'end': 0.49479166666666663, 'dur': 0.49479166666666663, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 64, 'start': 0.0, 'end': 0.49479166666666663, 'dur': 0.49479166666666663, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 67, 'start': 0.0, 'end': 0.49479166666666663, 'dur': 0.49479166666666663, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}]
+2025-11-07 17:03:41,205 INFO Reference DataFrame head:
+   pitch  start       end       dur  vel  channel  program     part color  beat_absolute  bar_index  beat_in_bar bar_beat_label
+0     41    0.0  0.744792  0.744792   80        0        0     bass  None            0.0          0          0.0          0:0.0
+1     57    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+2     60    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+3     64    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+4     67    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+
+Columns: ['pitch', 'start', 'end', 'dur', 'vel', 'channel', 'program', 'part', 'color', 'beat_absolute', 'bar_index', 'beat_in_bar', 'bar_beat_label']
+2025-11-07 17:03:41,235 ERROR Direct SQL load failed.
+Traceback (most recent call last):
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\midi_bench_gui.py", line 322, in run_comparison
+    n_ref = insert_notes_df(ref_df, "dbo.reference_notes", self.var_ref_path.get(), cfg, truncate=truncate)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\sql_load.py", line 244, in insert_notes_df
+    with _get_connection(cfg) as cn:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\sql_load.py", line 85, in _get_connection
+    return pyodbc.connect(conn_str, autocommit=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pyodbc.OperationalError: ('08001', '[08001] [Microsoft][ODBC Driver 18 for SQL Server]The client cannot connect to the server because the requested instance was not available. Use SQL Server Configuration Manager to make sure the SQL Server instance is configured correctly.  (0) (SQLDriverConnect)')
+2025-11-07 17:03:41,254 ERROR Ref head (safe): [{'pitch': 41, 'start': 0.0, 'end': 0.7447916666666666, 'dur': 0.7447916666666666, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'bass', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 57, 'start': 0.0, 'end': 0.49479166666666663, 'dur': 0.49479166666666663, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 60, 'start': 0.0, 'end': 0.49479166666666663, 'dur': 0.49479166666666663, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 64, 'start': 0.0, 'end': 0.49479166666666663, 'dur': 0.49479166666666663, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 67, 'start': 0.0, 'end': 0.49479166666666663, 'dur': 0.49479166666666663, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}]
+2025-11-07 17:15:22,194 INFO Reference DataFrame head:
+   pitch  start       end       dur  vel  channel  program     part color  beat_absolute  bar_index  beat_in_bar bar_beat_label
+0     41    0.0  0.744792  0.744792   80        0        0     bass  None            0.0          0          0.0          0:0.0
+1     57    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+2     60    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+3     64    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+4     67    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+
+Columns: ['pitch', 'start', 'end', 'dur', 'vel', 'channel', 'program', 'part', 'color', 'beat_absolute', 'bar_index', 'beat_in_bar', 'bar_beat_label']
+2025-11-07 17:15:22,222 ERROR Direct SQL load failed.
+Traceback (most recent call last):
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\midi_bench_gui.py", line 326, in run_comparison
+    n_ref = insert_notes_df(ref_df, "dbo.reference_notes", self.var_ref_path.get(), cfg, truncate=truncate)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "G:\My Drive\Code\Python\Ableton-midi-bench\src\midi_benchmark\sql_load.py", line 250, in insert_notes_df
+    cur.executemany(insert_sql, _rows_for_insert(out[_SQL_COLS]))
+pyodbc.ProgrammingError: ('42S22', "[42S22] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Invalid column name 'source_filename'. (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Invalid column name 'source_file_mtime'. (207); [42S22] [Microsoft][ODBC Driver 18 for SQL Server][SQL Server]Statement(s) could not be prepared. (8180)")
+2025-11-07 17:15:22,249 ERROR Ref head (safe): [{'pitch': 41, 'start': 0.0, 'end': 0.7447916666666666, 'dur': 0.7447916666666666, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'bass', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 57, 'start': 0.0, 'end': 0.49479166666666663, 'dur': 0.49479166666666663, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 60, 'start': 0.0, 'end': 0.49479166666666663, 'dur': 0.49479166666666663, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 64, 'start': 0.0, 'end': 0.49479166666666663, 'dur': 0.49479166666666663, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}, {'pitch': 67, 'start': 0.0, 'end': 0.49479166666666663, 'dur': 0.49479166666666663, 'vel': 80, 'channel': 0, 'program': 0, 'part': 'harmony', 'color': None, 'beat_absolute': 0.0, 'bar_index': 0, 'beat_in_bar': 0.0, 'bar_beat_label': '0:0.0'}]
+2025-11-07 18:14:23,561 INFO Reference DataFrame head:
+   pitch  start       end       dur  vel  channel  program     part color  beat_absolute  bar_index  beat_in_bar bar_beat_label
+0     41    0.0  0.744792  0.744792   80        0        0     bass  None            0.0          0          0.0          0:0.0
+1     57    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+2     60    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+3     64    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+4     67    0.0  0.494792  0.494792   80        0        0  harmony  None            0.0          0          0.0          0:0.0
+
+Columns: ['pitch', 'start', 'end', 'dur', 'vel', 'channel', 'program', 'part', 'color', 'beat_absolute', 'bar_index', 'beat_in_bar', 'bar_beat_label']
+2025-11-07 18:14:23,646 INFO Performance DataFrame head:
+   pitch  start       end       dur  vel  channel  program     part color  beat_absolute  bar_index  beat_in_bar bar_beat_label
+0     41    0.0  0.583333  0.583333   84        0        0     bass  None            0.0          0          0.0          0:0.0
+1     57    0.0  0.229167  0.229167   73        0        0  harmony  None            0.0          0          0.0          0:0.0
+2     60    0.0  0.223958  0.223958   70        0        0  harmony  None            0.0          0          0.0          0:0.0
+3     64    0.0  0.197917  0.197917   68        0        0  harmony  None            0.0          0          0.0          0:0.0
+4     67    0.0  0.223958  0.223958   72        0        0  harmony  None            0.0          0          0.0          0:0.0
+
+Columns: ['pitch', 'start', 'end', 'dur', 'vel', 'channel', 'program', 'part', 'color', 'beat_absolute', 'bar_index', 'beat_in_bar', 'bar_beat_label']

@@ -9,3 +9,6 @@ runs/
 /backups/
 /**/*.bak
 /**/*.trn
+
+# Local project env (do NOT commit)
+tools/.env.local

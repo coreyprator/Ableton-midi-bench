@@ -20,13 +20,32 @@ except Exception as ex:  # pragma: no cover
 # -----------------------------
 
 def _default_cfg() -> Dict[str, Any]:
+    """Build defaults from environment variables.
+
+    This function intentionally does not hard-code a SQL Server instance. The
+    authoritative values should be provided via the environment so the project
+    can be moved between machines by setting env vars only. Supported vars:
+
+    - MIDI_BENCH_SQL_SERVER (required)
+    - MIDI_BENCH_SQL_DATABASE (required)
+    - MIDI_BENCH_ODBC_DRIVER (optional, defaults to ODBC Driver 18)
+    - MIDI_BENCH_ENCRYPT (optional, boolean-like)
+    - MIDI_BENCH_TRUST_CERT (optional, boolean-like)
+    - MIDI_BENCH_MARS (optional, boolean-like)
+    """
+    def _bool_env(name: str, default: bool) -> bool:
+        v = os.environ.get(name)
+        if v is None:
+            return default
+        return str(v).lower() in ("1", "true", "yes", "y")
+
     return {
-        "server": r"(localdb)\MSSQLLocalDB",
-        "database": "ableton-midi-bench",
-        "odbc_driver": "ODBC Driver 17 for SQL Server",
-        "encrypt": False,
-        "trust_server_certificate": False,
-        "mars": True,
+        "server": os.environ.get("MIDI_BENCH_SQL_SERVER"),
+        "database": os.environ.get("MIDI_BENCH_SQL_DATABASE"),
+        "odbc_driver": os.environ.get("MIDI_BENCH_ODBC_DRIVER", "ODBC Driver 18 for SQL Server"),
+        "encrypt": _bool_env("MIDI_BENCH_ENCRYPT", False),
+        "trust_server_certificate": _bool_env("MIDI_BENCH_TRUST_CERT", False),
+        "mars": _bool_env("MIDI_BENCH_MARS", True),
     }
 
 
@@ -61,6 +80,11 @@ def build_conn_str(cfg: Optional[Dict[str, Any] | Any] = None) -> str:
     driver = c["odbc_driver"]
     server = c["server"]
     database = c["database"]
+    if not server or not database:
+        raise RuntimeError(
+            "SQL server and database must be provided. Set the environment variables "
+            "MIDI_BENCH_SQL_SERVER and MIDI_BENCH_SQL_DATABASE, or pass a cfg object."
+        )
     encrypt = "yes" if bool(c.get("encrypt")) else "no"
     tsc = "yes" if bool(c.get("trust_server_certificate")) else "no"
     mars = "yes" if bool(c.get("mars", True)) else "no"

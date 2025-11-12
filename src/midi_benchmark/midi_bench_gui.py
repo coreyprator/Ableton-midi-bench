@@ -1,6 +1,22 @@
+
 # src/midi_benchmark/midi_bench_gui.py
+# ------------------------------------------------------------------------------
+# Ableton MIDI Benchmark GUI
+#
+# Date: 2025-08-27
+# Purpose: Tkinter GUI for benchmarking MIDI performance, direct-to-SQL loading,
+#          config persistence, and robust workflow for Ableton Live MIDI analysis.
+#
+# Usage (from project root, PowerShell):
+#   & .venv\Scripts\python.exe -m src.midi_benchmark.midi_bench_gui
+#
+#   (or, if .venv is not used)
+#   python -m src.midi_benchmark.midi_bench_gui
+# ------------------------------------------------------------------------------
 """
-Ableton MIDI Benchmark GUI
+A Windows-friendly GUI for benchmarking MIDI performance against a reference clip
+exported from Ableton Live. Supports direct-to-SQL, config save/load, and robust
+workflow for research and teaching.
 """
 
 from __future__ import annotations
@@ -14,7 +30,7 @@ import sys
 from pathlib import Path
 
 # Direct-to-SQL helpers
-from .sql_load import insert_notes_df  # expects dict-like cfg
+from .sql_load import insert_notes_df, build_conn_str  # expects dict-like cfg; build_conn_str helps test connections
 # NOTE: PandasGUI intentionally not called (kept disabled)
 
 USE_PANDASGUI = False
@@ -38,11 +54,14 @@ DEFAULT_CONFIG = {
     "split_note": "B2",
     "verbose": False,
     "write_direct_sql": True,
-    "sql_server": r"(localdb)\MSSQLLocalDB",
-    "sql_database": "ableton-midi-bench",
-    "odbc_driver": "ODBC Driver 17 for SQL Server",
-    "encrypt": False,                   # LocalDB: keep False
-    "trust_server_certificate": False,
+    # SQL settings: prefer environment variables for portability
+    "sql_server": os.environ.get("MIDI_BENCH_SQL_SERVER", ""),
+    "sql_database": os.environ.get("MIDI_BENCH_SQL_DATABASE", ""),
+    "odbc_driver": os.environ.get("MIDI_BENCH_ODBC_DRIVER", "ODBC Driver 18 for SQL Server"),
+    "encrypt": os.environ.get("MIDI_BENCH_ENCRYPT", "false").lower() in ("1", "true", "yes"),
+    # For local development it's common to use TrustServerCertificate to avoid
+    # self-signed certificate prompts when connecting via ODBC Driver 18.
+    "trust_server_certificate": os.environ.get("MIDI_BENCH_TRUST_CERT", "true").lower() in ("1", "true", "yes"),
     "truncate_before_load": True,
     "load_reference": True,
     "load_performance": True,
@@ -88,12 +107,13 @@ class MidiBenchGUI(tk.Tk):
         self.var_split_note = tk.StringVar(value="B2")
         self.var_verbose = tk.BooleanVar(value=False)
         self.var_direct_sql = tk.BooleanVar(value=True)
-        self.var_sql_server = tk.StringVar(value=r"(localdb)\MSSQLLocalDB")
-        self.var_sql_db = tk.StringVar(value="ableton-midi-bench")
-        self.var_odbc_driver = tk.StringVar(value="ODBC Driver 17 for SQL Server")
-        self.var_encrypt = tk.BooleanVar(value=False)
-        self.var_trust_cert = tk.BooleanVar(value=False)
-        self.var_mars = tk.BooleanVar(value=True)
+        # Defaults read from environment for portability; GUI fields still editable
+        self.var_sql_server = tk.StringVar(value=os.environ.get("MIDI_BENCH_SQL_SERVER", ""))
+        self.var_sql_db = tk.StringVar(value=os.environ.get("MIDI_BENCH_SQL_DATABASE", ""))
+        self.var_odbc_driver = tk.StringVar(value=os.environ.get("MIDI_BENCH_ODBC_DRIVER", "ODBC Driver 18 for SQL Server"))
+        self.var_encrypt = tk.BooleanVar(value=os.environ.get("MIDI_BENCH_ENCRYPT", "false").lower() in ("1", "true", "yes"))
+        self.var_trust_cert = tk.BooleanVar(value=os.environ.get("MIDI_BENCH_TRUST_CERT", "true").lower() in ("1", "true", "yes"))
+        self.var_mars = tk.BooleanVar(value=os.environ.get("MIDI_BENCH_MARS", "true").lower() in ("1", "true", "yes"))
 
         self.create_widgets()
 
@@ -154,6 +174,10 @@ class MidiBenchGUI(tk.Tk):
 
         tk.Label(self, text="ODBC Driver:").grid(row=row, column=1, sticky="e")
         tk.Entry(self, textvariable=self.var_odbc_driver, width=30).grid(row=row, column=2, sticky="w")
+        row += 1
+
+        # Test connection button (quick DB health-check)
+        tk.Button(self, text="Test DB Connection", command=self.test_db_connection).grid(row=row, column=3, padx=4)
         row += 1
 
         tk.Checkbutton(self, text="Encrypt (yes/no)", variable=self.var_encrypt).grid(row=row, column=2, sticky="w")
@@ -250,11 +274,11 @@ class MidiBenchGUI(tk.Tk):
             self.var_split_note.set(config.get("split_note", "B2"))
             self.var_verbose.set(bool(config.get("verbose", False)))
             self.var_direct_sql.set(bool(config.get("write_direct_sql", True)))
-            self.var_sql_server.set(config.get("sql_server", r"(localdb)\MSSQLLocalDB"))
-            self.var_sql_db.set(config.get("sql_database", "ableton-midi-bench"))
-            self.var_odbc_driver.set(config.get("odbc_driver", "ODBC Driver 17 for SQL Server"))
-            self.var_encrypt.set(bool(config.get("encrypt", False)))
-            self.var_trust_cert.set(bool(config.get("trust_server_certificate", False)))
+            self.var_sql_server.set(config.get("sql_server", DEFAULT_CONFIG.get("sql_server", "")))
+            self.var_sql_db.set(config.get("sql_database", DEFAULT_CONFIG.get("sql_database", "")))
+            self.var_odbc_driver.set(config.get("odbc_driver", DEFAULT_CONFIG.get("odbc_driver", "ODBC Driver 18 for SQL Server")))
+            self.var_encrypt.set(bool(config.get("encrypt", DEFAULT_CONFIG.get("encrypt", False))))
+            self.var_trust_cert.set(bool(config.get("trust_server_certificate", DEFAULT_CONFIG.get("trust_server_certificate", False))))
             self.var_truncate.set(bool(config.get("truncate_before_load", True)))
             self.var_load_ref.set(bool(config.get("load_reference", True)))
             self.var_load_perf.set(bool(config.get("load_performance", True)))
@@ -370,6 +394,46 @@ class MidiBenchGUI(tk.Tk):
         t.config(state="normal")
         t.pack(expand=True, fill="both")
         tk.Button(w, text="Close", command=w.destroy).pack(pady=6)
+
+    def test_db_connection(self):
+        """Build a connection string from the GUI values and try a short pyodbc connect.
+        Shows a messagebox with the result (success or error details).
+        """
+        try:
+            # Build cfg dict similar to run_comparison
+            cfg = {
+                "server": self.var_sql_server.get(),
+                "database": self.var_sql_db.get(),
+                "odbc_driver": self.var_odbc_driver.get(),
+                "encrypt": bool(self.var_encrypt.get()),
+                "trust_server_certificate": bool(self.var_trust_cert.get()),
+                "mars": bool(self.var_mars.get()),
+            }
+
+            # Build connection string for display and for pyodbc
+            conn_str = build_conn_str(cfg)
+
+            try:
+                import pyodbc  # type: ignore
+            except Exception as ex:  # pragma: no cover
+                messagebox.showerror("DB Test", f"pyodbc is not available: {ex}")
+                return
+
+            # Try to connect with short timeout
+            try:
+                cn = pyodbc.connect(conn_str, timeout=5)
+                cn.close()
+                messagebox.showinfo("DB Test", f"Connection succeeded.\n\n{conn_str}")
+            except Exception as e:
+                msg = str(e)
+                # keep message reasonably sized
+                if len(msg) > 1500:
+                    msg = msg[:1500] + "... (truncated)"
+                messagebox.showerror("DB Test", f"Connection failed:\n\n{msg}\n\nConnection string:\n{conn_str}")
+
+        except Exception as e:
+            logging.exception("Unexpected error during DB test")
+            messagebox.showerror("DB Test", f"Unexpected error: {e}")
 
 if __name__ == "__main__":
     app = MidiBenchGUI()

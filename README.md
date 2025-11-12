@@ -97,6 +97,50 @@ SCHTASKS /Create /TN "AbletonMidiBenchNightlyBackup" /XML ".\tools\schedule_back
 
 Defaults target (localdb)\MSSQLLocalDB, but for reliable BACKUP support we recommend .\SQLEXPRESS.
 
+## Environment variables (recommended)
+
+This project prefers environment variables for SQL configuration so the same code works across machines. Set these in PowerShell for the current session:
+
+```powershell
+$env:MIDI_BENCH_SQL_SERVER = '.\SQLEXPRESS01'
+$env:MIDI_BENCH_SQL_DATABASE = 'ableton-midi-bench'
+# optional
+$env:MIDI_BENCH_ODBC_DRIVER = 'ODBC Driver 18 for SQL Server'
+$env:MIDI_BENCH_TRUST_CERT = 'true'
+$env:MIDI_BENCH_ENCRYPT = 'false'
+```
+
+To persist permanently (per-user) use `setx` (open a new shell afterwards):
+
+```powershell
+setx MIDI_BENCH_SQL_SERVER ".\\SQLEXPRESS01"
+setx MIDI_BENCH_SQL_DATABASE "ableton-midi-bench"
+```
+
+All provided PowerShell helpers (`tools/*.ps1`) will prefer the environment variables if you omit `-Instance`/`-Database` on the command line.
+
+### Project activation helper
+
+For a convenient, repeatable workflow we provide `tools/activate-project.ps1` which loads a local `tools/.env.local` file (gitignored) and sets the recommended environment variables for the current PowerShell session.
+
+Steps:
+
+1. Copy the template and edit for your machine:
+
+```powershell
+copy .\tools\.env.template .\tools\.env.local
+# then edit tools\.env.local with your server/database
+```
+
+2. Activate the venv and dot-source the helper in the same PowerShell session:
+
+```powershell
+. .\venv\Scripts\Activate.ps1   # or .venv\Scripts\Activate.ps1 from repo root
+. .\tools\activate-project.ps1
+```
+
+The helper prints the effective variables it set. This keeps per-machine values out of source control and avoids editing `.venv` activation scripts.
+
 ### Acceptance
 - Running `./tools/backup_db.ps1` produces a timestamped `.bak` in `backups/`.
 - `-Keep` prunes older backups.

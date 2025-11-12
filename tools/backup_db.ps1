@@ -1,6 +1,6 @@
 param(
-    [string]$Instance    = "(localdb)\MSSQLLocalDB",   # Change to ".\SQLEXPRESS" if desired
-    [string]$Database    = "ableton-midi-bench",
+    [string]$Instance    = "",
+    [string]$Database    = "",
     [string]$BackupDir   = "$PSScriptRoot\..\backups",
     [int]   $Keep        = 10,                         # keep last N backups; set 0 to disable pruning
     [switch]$Verify                                      # if set, run RESTORE VERIFYONLY after backup
@@ -13,6 +13,17 @@ function Write-Warn($msg)  { Write-Host "[WARN]   $msg" -ForegroundColor Yellow 
 function Write-Err ($msg)  { Write-Host "[ERROR]  $msg" -ForegroundColor Red }
 
 try {
+    # Prefer environment variables if parameters not supplied
+    if (-not $Instance -and $env:MIDI_BENCH_SQL_SERVER) { $Instance = $env:MIDI_BENCH_SQL_SERVER }
+    if (-not $Database -and $env:MIDI_BENCH_SQL_DATABASE) { $Database = $env:MIDI_BENCH_SQL_DATABASE }
+    if (-not $Instance) {
+        Write-Err "No SQL Instance specified. Provide -Instance or set the MIDI_BENCH_SQL_SERVER environment variable."
+        exit 2
+    }
+    if (-not $Database) {
+        Write-Err "No Database specified. Provide -Database or set the MIDI_BENCH_SQL_DATABASE environment variable."
+        exit 2
+    }
     # Ensure sqlcmd is available
     $sqlcmd = Get-Command sqlcmd -ErrorAction SilentlyContinue
     if (-not $sqlcmd) {

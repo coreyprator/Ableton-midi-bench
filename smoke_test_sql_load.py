@@ -18,11 +18,12 @@ REF_MIDI  = Path("data/reference_melody.mid")
 PERF_MIDI = Path("data/performance_comping take 2025-08-25 0817.mid")
 
 SQL_CFG = {
-    "driver": "ODBC Driver 17 for SQL Server",
-    "server": r"(localdb)\MSSQLLocalDB",
-    "database": "ableton-midi-bench",
-    "trusted_connection": "yes",
-    "encrypt": "no",
+    "odbc_driver": os.environ.get("MIDI_BENCH_ODBC_DRIVER", "ODBC Driver 18 for SQL Server"),
+    "server": os.environ.get("MIDI_BENCH_SQL_SERVER", ""),
+    "database": os.environ.get("MIDI_BENCH_SQL_DATABASE", ""),
+    # legacy keys kept for compatibility; sql_load.build_conn_str expects booleans
+    "encrypt": os.environ.get("MIDI_BENCH_ENCRYPT", "false").lower() in ("1", "true", "yes"),
+    "trusted_connection": True,
 }
 # ----------------------------
 
